@@ -14,36 +14,62 @@ public class App {
     public static void main(String[] args){
         // Buscar/Crear un cliente
         Customer customerModel = new Customer("Juan");
-        
-        // Abrir una nueva cuenta
         CuentaBancaria cuenta1 = new CuentaBancaria(customerModel, "123456", 1000);
         System.out.println("cuenta1 creada.");
         System.out.println(cuenta1.estaCerrada());
         
+        // Pruebas Generales sobre cuenta bancaria
+        testGeneralAccOperations(cuenta1);
+
+        // Pruebas sobre Mostrar el saldo final y el historial de transacciones
+        testSaldoFinalAndHistorialTransacciones(cuenta1);
+
+        // Pruebas sobre Cambiar el titular de la cuenta
+        testCambiarTitular(cuenta1);
+
+        // Pruebas sobre Historial de Transacciones
+        testHistorialTransacciones(cuenta1);
+        
+        // Pruebas sobre Una cuenta Cerrada
+        testCuentaCerrada(cuenta1);
+    }
+    
+    private static void testGeneralAccOperations(CuentaBancaria cuenta){
         // Realizar algunas operaciones
-        cuenta1.depositar(500);
-        cuenta1.retirar(200);
-        cuenta1.transferir(cuenta1, 300); // Transferencia a sí mismo para evitar excepción
-        cuenta1.transferir(cuenta1, 2000); // Intentar transferir más de lo que hay en la cuenta
-
-        // Mostrar el saldo final y el historial de transacciones
-        System.out.println("Saldo final de la cuenta " + cuenta1.getNumeroCuenta() + ": " + cuenta1.getSaldo());
-        cuenta1._transactionHistory.mostrarHistorialTransacciones();
-
-        // Cambiar el titular de la cuenta
-        Customer customerModel2 = new Customer("Pedro");
-        cuenta1.cambiarTitular(customerModel2);
-
+        cuenta.depositar(500);
+        cuenta.retirar(200);
+        cuenta.transferir(cuenta, 300); // Transferencia a sí mismo para evitar excepción
+        cuenta.transferir(cuenta, 2000); // Intentar transferir más de lo que hay en la cuenta
+    }
+    
+    private static void testSaldoFinalAndHistorialTransacciones(CuentaBancaria cuenta){
+        System.out.println("Saldo final de la cuenta " + cuenta.getNumeroCuenta() + ": " + cuenta.getSaldo());
+        cuenta._transactionHistory.mostrarHistorialTransacciones();
+    }
+    
+    private static void testCambiarTitular(CuentaBancaria cuenta){
+        Customer customerModel = new Customer("Pedro"); // <- hardcoded values are somewhat acceptable in test cases, thats why i did SRP like this
+        cuenta.cambiarTitular(customerModel);
+        // expect? no crashes
+    }
+    
+    private static void testHistorialTransacciones(CuentaBancaria cuenta){
         // Consultar el último movimiento
-        System.out.println("\nÚltimo movimiento: " + cuenta1._transactionHistory.consultarUltimoMovimiento());
-
+        System.out.println("\nÚltimo movimiento: " + cuenta._transactionHistory.consultarUltimoMovimiento());
+        // expect? no crashes
+    }
+    
+    private static void testCuentaCerrada(CuentaBancaria cuenta){
+        System.out.println("\nPRUEBAS SOBRE CUENTA CERRADA");
+        
         // Cerrar la cuenta
-        cuenta1.cerrarCuenta();
+        cuenta.cerrarCuenta();
 
         // Intentar realizar operaciones en una cuenta cerrada
-        cuenta1.depositar(100);
-        cuenta1.retirar(50);
-        cuenta1.transferir(cuenta1, 100);
+        cuenta.depositar(100);
+        cuenta.retirar(50);
+        cuenta.transferir(cuenta, 100);
+        // expect? no crashes
     }
 
 }
