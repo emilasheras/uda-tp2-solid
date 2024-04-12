@@ -31,7 +31,8 @@ public class App {
         cuenta1._transactionHistory.mostrarHistorialTransacciones();
 
         // Cambiar el titular de la cuenta
-        cuenta1.cambiarTitular("Pedro");
+        Customer customerModel2 = new Customer("Pedro");
+        cuenta1.cambiarTitular(customerModel2);
 
         // Consultar el último movimiento
         System.out.println("\nÚltimo movimiento: " + cuenta1._transactionHistory.consultarUltimoMovimiento());

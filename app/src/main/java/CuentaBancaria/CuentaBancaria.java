@@ -21,22 +21,17 @@ public class CuentaBancaria extends BasicAccount {
         this._transactionHistory.registrarTransaccion("Cuenta creada con saldo inicial de " + saldoInicial);
     }
     
-    private void cambiarTitular(Customer customerModel){
-
-    }
-    
-    public void cambiarTitular(String nuevoTitular) {
+    public void cambiarTitular(Customer customerModel){
         if (!cerrada) {
-            //titular = nuevoTitular;
-            
             this._customerModel = customerModel;
             this.titular = this._customerModel.getName();
             
-            System.out.println("Titular de la cuenta cambiado a: " + nuevoTitular);
+            System.out.println("Titular de la cuenta cambiado a: " + this.titular);
         } else {
             System.out.println("No se puede cambiar el titular de una cuenta cerrada.");
         }
     }
+    
 
     public void depositar(double cantidad) {
         if (!cerrada) {
