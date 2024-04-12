@@ -1,0 +1,28 @@
+# built by netbeans:
+# Ignore Gradle project-specific cache directory
+.gradle
+# Ignore Gradle build output directory
+build
+
+# built by GPT4
+# NetBeans specific #
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+# Class Files #
+*.class
+# Package Files #
+*.jar
+*.war
+*.ear
+# Other files #
+*.log
+*.sql
+*.jar
+*.war
+*.rar
+hs_err_pid*
